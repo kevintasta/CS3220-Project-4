@@ -1,0 +1,4 @@
+module Forwarding (opIn, opEx, opMem, opWb, reg1In, reg2In, regDestEx, regDestMem, regDestWb)
+	always @(*) begin
+	end
+endmodule

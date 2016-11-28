@@ -1,0 +1,3 @@
+module ForwardMux (regOut, aluOut, memOut, wbOut, muxOut);
+	
+endmodule

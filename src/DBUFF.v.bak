@@ -1,0 +1,16 @@
+module DBUFF(incPC, src1RegIn, src2RegIn, sextIn, , aluOprIn,  clk, wrEn, flush, pcOut, instrOut);
+	input wrEn, flush, clk;
+	input [31:0] incPC, instrIn;
+	output reg [31:0] pcOut, instrOut;
+	
+	always @(posedge clk) begin
+		if (flush == 1'b1) begin
+			pcOut <= 0;
+			instrOut <= 0;
+		end
+		if (wrEn == 1'b1) begin
+			pcOut <= incPC;
+			instrOut <= instrIn;
+		end
+	end
+endmodule

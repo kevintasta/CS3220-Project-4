@@ -1,0 +1,3 @@
+module IBUFF(incPC, instrIn, wrEn, flush, pcOut, instrOut);
+
+endmodule
