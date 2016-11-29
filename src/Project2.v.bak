@@ -76,46 +76,8 @@ module Project2(SW,KEY,LEDR,HEX0,HEX1,HEX2,HEX3,CLOCK_50,FPGA_RESET_N);
    wire [DBITS - 1:0] condRegResult;           // ALU condition flag result zero-extended
    wire [DBITS - 1:0] dataMemOut;              // Data memory output
    wire [9:0] debounced_SW;                    // debounced switches
-	wire iFlush, dFlush, eFlush, mFlush;		  // flush signals for buffers
-	
-	wire [DBITS - 1:0] ibuffPc;					  // incremented pc from instruction buffer
-	wire [DBITS - 1:0] ibuffInst;					  // instruction output from instruction buffer
-	
-	wire [DBITS - 1:0] dbuffPc;					  // incremented pc from decode buffer
-	wire [DBITS - 1:0] dbuffregData1;           // decode buffer source reg. 1 data
-   wire [DBITS - 1:0] dbuffregData2;           // decode buffer source reg. 2 data
-	wire [DBITS - 1:0] dbuffimmval;             // Sign-extended immediate value from decode buffer
-	wire [3:0] dbuffaluOp;                      // ALU arithmetic function opcode from decode buffer
-   wire [3:0] dbuffcmpOp;                      // ALU comparison function opcode from decode buffer
-	wire [1:0] dbuffalu2MuxSel;                 // alu2Mux select signal from decode buffer
-	wire [3:0] dbuffregWriteNo;                 // destination reg. number from decode buffer
-	wire dbuffwrMem;                            // write enable for data memory from decode buffer
-   wire dbuffwrReg;                            // write enable for register file from decode buffer
-	wire dbuffisLoadWord;							  // is load word flag from decode buffer
-	wire dbuffopcode;									  // opcode from decode buffer
-	wire [1:0] dbuffdstRegMuxSel;               // dstRegMux select signal from decode buffer
-	
-	wire [DBITS - 1:0] ebuffPc;					  // incremented pc from execute buffer
-	wire [DBITS - 1:0] ebuffregData2;           // execute buffer source reg. 2 data
-	wire [DBITS - 1:0] ebuffaluResult;          // ALU arithmetic output from execute buffer
-	wire [DBITS - 1:0] ebuffcondRegResult;      // ALU condition flag result zero-extended from execute buffer
-	wire [3:0] ebuffregWriteNo;                 // destination reg. number from execute buffer
-	wire ebuffwrMem;                            // write enable for data memory from execute buffer
-   wire ebuffwrReg;                            // write enable for register file from execute buffer
-	wire ebuffisLoadWord;							  // is load word flag from execute buffer
-	wire ebuffopcode;									  // opcode from execute buffer
-	wire [1:0] ebuffdstRegMuxSel;   				  // dstRegMux select signal from execute buffer
-	
-	wire [DBITS - 1:0] mbuffwrRegData;          // data to write to destination register from memory buffer
-	wire [3:0] mbuffregWriteNo;                 // destination reg. number from memory buffer
-	wire mbuffwrReg;                            // write enable for register file from memory buffer
-	wire mbuffopcode;									  // opcode from memory buffer
-	
-	wire [1:0] reg1Mux, reg2Mux;					  // select for the two forwarding multiplexers
-	
-	wire [DBITS - 1:0] forwardReg1, forwardReg2; // the true values for reg1 and reg2
-	
-	wire isLoadWord;									  // is the instruction a load word which is used to either select alu result or mem read for writeback
+
+
    // Clock divider and reset
    assign reset = ~FPGA_RESET_N;
    // We run at around 25 MHz. Timing analyzer estimates the design can support
@@ -140,7 +102,6 @@ module Project2(SW,KEY,LEDR,HEX0,HEX1,HEX2,HEX3,CLOCK_50,FPGA_RESET_N);
    SevenSeg hex2Disp(hex[11:8], HEX2);
    SevenSeg hex3Disp(hex[15:12], HEX3);
 
-	//------------------------INSTRUCTION FETCH--------------------------------------
    // Create PC and its logic
    Register #(DBITS, START_PC) pc(clk, reset, 1'b1, pcIn, pcOut);
 
@@ -158,25 +119,20 @@ module Project2(SW,KEY,LEDR,HEX0,HEX1,HEX2,HEX3,CLOCK_50,FPGA_RESET_N);
    // Create instruction memory
    InstMemory #(IMEM_INIT_FILE, IMEM_ADDR_BIT_WIDTH, IMEM_DATA_BIT_WIDTH)
        instMem(pcOut[IMEM_PC_BITS_HI - 1: IMEM_PC_BITS_LO], instWord);
-	
-	// Compute the branch offset + incremented PC for use in fetch
-	BranchOffset calcOffset(instWord, pcIncremented, brBaseOffset);
-	
-	// Create the instruction fetch buffer
-	IBUFF instructionBuffer(pcIncremented, instWord, clk, iFlush, ibuffPc, ibuffInst);
-	
-	//------------------------DECODE--------------------------------------
-	// Instruction decoder splits out all pertinent fields
-   Decoder #(IMEM_DATA_BIT_WIDTH) decoder(ibuffInst, opcode, func, rd, rs1, rs2, immediate, isLoadWord);
-	
+
+   // Instruction decoder splits out all pertinent fields
+   Decoder #(IMEM_DATA_BIT_WIDTH) decoder(instWord, opcode, func, rd, rs1, rs2, immediate);
+
    // Sign extend the immediate value
    SignExtension #(16, DBITS) immSext(immediate, immval);
 
    // Instruction offset for use in BR/JAL calculations
    Shiftbit #(DBITS, 2) instOffsetShift(immval, instOffset);
 
-   // Controller for decode. We only need certain signals here
-   SCProcController decodeController(// Outputs
+   // Controller examines opcode, func, and ALU condition to generate control signals
+   SCProcController controller(// Outputs
+                               .allowBr         (allowBr),
+                               .brBaseMux       (brBaseMuxSel),
                                .rs1Mux          (rs1MuxSel),
                                .rs2Mux          (rs2MuxSel),
                                .alu2Mux         (alu2MuxSel[1:0]),
@@ -194,48 +150,24 @@ module Project2(SW,KEY,LEDR,HEX0,HEX1,HEX2,HEX3,CLOCK_50,FPGA_RESET_N);
    Multiplexer2bit #(4) rs1Mux(rs1, rd, rs1MuxSel, regRead1No);
    Multiplexer4bit #(4) rs2Mux(rs2, rd, rs1, 4'b0, rs2MuxSel, regRead2No);
    
-   RegisterFile #(DBITS) regFile(clk, reset, mbuffwrReg, mbuffregWriteNo, regRead1No,
-                                 regRead2No, regData1, regData2, mbuffwrRegData);
+   RegisterFile #(DBITS) regFile(clk, reset, wrReg, regWriteNo, regRead1No,
+                                 regRead2No, regData1, regData2, wrRegData);
 
-	// Create the decode buffer
-	DBUFF decodeBuffer(ibuffPc, forwardReg1, forwardReg2, immval, aluOp, cmpOp, alu2MuxSel, regWriteNo, wrReg, wrMem, isLoadWord, opcode, dstRegMuxSel, clk, dFlush,
-								dbuffPc, dbuffregData1, dbuffregData2, dbuffimmval, dbuffaluOp, dbuffcmpOp, dbuffalu2MuxSel,
-								dbuffregWriteNo, dbuffwrReg, dbuffwrMem, dbuffisLoadWord, dbuffopcode, dbuffdstRegMuxSel)
-   //------------------------EXECUTE--------------------------------------
-	// Create ALU unit
-	assign condRegResult = {{DBITS - 1{1'b0}} ,{condFlag}};
-   Alu #(DBITS) procAlu(a, b, dbuffaluOp, dbuffcmpOp, condFlag, aluResult);
+   // Assign destination register data
+   assign condRegResult = {{DBITS - 1{1'b0}} ,{condFlag}};
+   Multiplexer4bit #(DBITS) dstRegMux(aluResult, dataMemOut, pcIncremented,
+                                      condRegResult, dstRegMuxSel, wrRegData);
+
+   // Create ALU unit
+   Alu #(DBITS) procAlu(a, b, aluOp, cmpOp, condFlag, aluResult);
 
    // Assign ALU inputs
-   assign a = dbuffregData1;
-   Multiplexer4bit #(DBITS) alu2Mux(dbuffregData2, dbuffimmval, 32'b0, 32'b0, dbuffalu2MuxSel, b);
-	
-	// Create the execute buffer
-	EBUFF executeBuffer(dbuffPc, dbuffregData2, aluResult, condRegResult, dbuffregWriteNo, dbuffwrReg, dbuffwrMem, dbuffisLoadWord, dbuffopcode, dbuffdstRegMuxSel, clk, eFlush,
-								ebuffPc, ebuffregData2, ebuffaluResult, ebuffcondRegResult, ebuffregWriteNo, ebuffwrReg, ebuffwrMem, ebuffisLoadWord, ebuffopcode, ebuffdstRegMuxSel);
-	
-	//------------------------MEMORY--------------------------------------
+   assign a = regData1;
+   Multiplexer4bit #(DBITS) alu2Mux(regData2, immval, 32'b0, 32'b0, alu2MuxSel, b);
+
    // Create Data Memory
    DataMemory #(IMEM_INIT_FILE)
-      datamem(clk, ebuffwrMem, ebuffaluResult, ebuffregData2, debounced_SW, KEY, LEDR, hex, dataMemOut);
+      datamem(clk, wrMem, aluResult, regData2, debounced_SW, KEY, LEDR, hex, dataMemOut);
    // KEYS, SWITCHES, HEXS, and LEDS are memory mapped IO
-	
-	Multiplexer4bit #(DBITS) dstRegMux(ebuffaluResult, dataMemOut, ebuffPc,
-                                      ebuffcondRegResult, ebuffdstRegMuxSel, wrRegData);
-	
-	// Create the memory buffer
-	MBUFF memoryBuffer(wrRegData, ebuffregWriteNo, ebuffwrReg, ebuffopcode, clk, mFlush,
-								mbuffwrRegData, mbuffregWriteNo, mbuffwrReg, mbuffopcode)
-	
-	//------------------------WRITEBACK--------------------------------------
-	// Pretty much nothing happens here since we already have assigned the relevant values from the mbuff to the reg file
-   
-	
-	//------------------------FORWARDING UNIT--------------------------------------
-	//Forwarding transcends states
-	Forwarding FU(opcode, dbuffopcode, ebuffopcode, mbuffopcode, regRead1No, regRead2No, dbuffregWriteNo, ebuffregWriteNo, mbuffregWriteNo, reg1Mux, reg2Mux);
-	
-	//Forwarding multiplexers
-	ForwardMux FM1(regData1, aluResult, dataMemOut, mbuffwrRegData, reg1Mux, forwardReg1);
-	ForwardMux FM1(regData1, aluResult, dataMemOut, mbuffwrRegData, reg2Mux, forwardReg2);
+
 endmodule

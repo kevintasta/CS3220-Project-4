@@ -1,5 +1,5 @@
-module IBUFF(incPC, instrIn, clk, wrEn, flush, pcOut, instrOut);
-	input wrEn, flush, clk;
+module IBUFF(incPC, instrIn, clk, flush, pcOut, instrOut);
+	input flush, clk;
 	input [31:0] incPC, instrIn;
 	output reg [31:0] pcOut, instrOut;
 	
@@ -8,7 +8,7 @@ module IBUFF(incPC, instrIn, clk, wrEn, flush, pcOut, instrOut);
 			pcOut <= 0;
 			instrOut <= 0;
 		end
-		if (wrEn == 1'b1) begin
+		else begin
 			pcOut <= incPC;
 			instrOut <= instrIn;
 		end

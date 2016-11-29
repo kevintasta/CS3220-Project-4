@@ -1,22 +1,29 @@
-module EBUFF(src1RegIn, aluCalcIn, destRegIn, regWrEnIn, memWrEnIn, clk, wrEn, flush,
-	src1RegOut, aluCalcOut, destRegOut, regWrEnOut, memWrEnOut);
-	input wrEn, flush, clk, regWrEnIn, memWrEnIn;
-	input [31:0] aluCalcIn;
-	input [3:0] src1RegIn, destRegIn;
-	output reg [31:0] aluCalcOut;
-	output reg regWrEnOut, memWrEnOut;
-	output reg [3:0] src1RegOut, destRegOut;
+module EBUFF(pcIn, src1RegIn, aluCalcIn, aluCondIn, destRegIn, regWrEnIn, memWrEnIn, isLWIn, opIn, dstMuxIn, clk, flush,
+	pcOut, src1RegOut, aluCalcOut, aluCondOut, destRegOut, regWrEnOut, memWrEnOut, isLWOut, opOut, dstMuxOut);
+	input flush, clk, regWrEnIn, memWrEnIn, isLWIn;
+	input [31:0] pcIn, aluCalcIn, aluCondIn;
+	input [3:0] src1RegIn, destRegIn, opIn;
+	input [1:0] dstMuxIn;
+	output reg [31:0] pcOut, aluCalcOut, aluCondOut;
+	output reg regWrEnOut, memWrEnOut, isLWOut;
+	output reg [3:0] src1RegOut, destRegOut, opOut;
+	output reg [1:0] dstMuxOut;
 	
 	always @(posedge clk) begin
 		if (flush == 1'b1) begin
 			{aluCalcOut, src1RegOut, destRegOut, regWrEnOut, memWrEnOut} <= 0;
 		end
-		if (wrEn == 1'b1) begin
+		else begin
+			pcOut <= pcIn;
 			aluCalcOut <= aluCalcIn;
 			src1RegOut <= src1RegIn;
 			destRegOut <= destRegIn;
 			regWrEnOut <= regWrEnIn;
 			memWrEnOut <= memWrEnIn;
+			aluCondOut <= aluCondIn;
+			isLWOut <= isLWIn;
+			opOut <= opIn;
+			dstMuxOut <= dstMuxIn;
 		end
 	end
 endmodule

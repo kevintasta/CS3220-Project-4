@@ -1,10 +1,9 @@
-module Decoder(inst, op_code, func_code, rd, rs1, rs2, imm, isLW);
+module Decoder(inst, op_code, func_code, rd, rs1, rs2, imm);
       parameter bitwidth=32;
       input[bitwidth-1:0] inst;
       output[3:0] op_code,func_code,rd,rs1,rs2;
       reg[3:0] op_code,func_code,rd,rs1,rs2;
       output[15:0] imm;
-		output reg isLW;
       reg[15:0] imm;
       always @(inst) 
       begin
@@ -14,11 +13,5 @@ module Decoder(inst, op_code, func_code, rd, rs1, rs2, imm, isLW);
          rs1 = inst[19:16];
          rs2 = inst[15:12];
          imm = inst[15:0];
-			if (op_code == 4'b0111) begin
-				isLW = 1'b1;
-			end
-			else begin
-				isLW = 1'b0;
-			end
       end
 endmodule

@@ -1,20 +1,21 @@
-module MBUFF(memValIn, destRegIn, regWrEnIn, clk, wrEn, flush,
-	memValOut, destRegOut, regWrEnOut);
-	input wrEn, flush, clk, regWrEnIn;
+module MBUFF(memValIn, destRegIn, regWrEnIn, opIn, clk, flush,
+	memValOut, destRegOut, regWrEnOut, opOut);
+	input flush, clk, regWrEnIn;
 	input [31:0] memValIn;
-	input [3:0] destRegIn;
+	input [3:0] destRegIn, opIn;
 	output reg [31:0] memValOut;
 	output reg regWrEnOut;
-	output reg [3:0] destRegOut;
+	output reg [3:0] destRegOut, opOut;
 	
 	always @(posedge clk) begin
 		if (flush == 1'b1) begin
 			{memValOut, destRegOut, regWrEnOut} <= 0;
 		end
-		if (wrEn == 1'b1) begin
+		else begin
 			memValOut <= memValIn;
 			destRegOut <= destRegIn;
 			regWrEnOut <= regWrEnIn;
+			opOut <= opIn;
 		end
 	end
 endmodule
