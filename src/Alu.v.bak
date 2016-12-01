@@ -28,8 +28,8 @@ module Alu(a,b,alu_func, cmp_func, flag, out);
       case(cmp_func)
         4'b0000: flag = 1'b1;              //TRUE
         4'b0011: flag = 1'b0;              //FALSE
-        4'b0101: flag = ($signed(out) != $signed({bitwidth{1'b0}})) ? 1'b1 : 1'b0;   // A!=B
-        4'b0110: flag = ($signed(out) == $signed({bitwidth{1'b0}})) ? 1'b1 : 1'b0;   // A==B
+        4'b0101: flag = (out != {bitwidth{1'b0}}) ? 1'b1 : 1'b0;   // A!=B
+        4'b0110: flag = (out == {bitwidth{1'b0}}) ? 1'b1 : 1'b0;   // A==B
         4'b1001:
           flag = ($signed(out) < $signed({bitwidth{1'b0}}))  ? 1'b1 : 1'b0;   // A<B
         4'b1010:

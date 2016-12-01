@@ -9,37 +9,31 @@ module Forwarding (opIn, opEx, opMem, opWb, reg1In, reg2In, regDestEx, regDestMe
 	output reg [1:0] reg1Mux = 2'b00, reg2Mux = 2'b00;
 	always @ (*) begin
 		//Forwarding for reg1
-		if (regDestEx == reg1In) begin
-			if (opEx != SW || opEx != BRANCH || opEx != NOP) begin
-				reg1Mux = ALU;
-			end
+		if (regDestEx == reg1In && (opEx != SW && opEx != BRANCH && opEx != NOP)) begin
+			reg1Mux = ALU;
 		end
-		else if (regDestMem == reg1In) begin
-			if (opEx != SW || opEx != BRANCH || opEx != NOP) begin
-				reg1Mux = MEM;
-			end
+		else if (regDestMem == reg1In && (opMem != SW && opMem != BRANCH && opMem != NOP)) begin
+			reg1Mux = MEM;
 		end
-		else if (regDestWb == reg1In) begin
-			if (opEx != SW || opEx != BRANCH || opEx != NOP) begin
-				reg1Mux = WB;
-			end
+		else if (regDestWb == reg1In && (opWb != SW && opWb != BRANCH && opWb != NOP)) begin
+			reg1Mux = WB;
+		end
+		else begin
+			reg1Mux = REG;
 		end
 		
 		//Forwarding for reg2
-		if (regDestEx == reg2In) begin
-			if (opEx != SW || opEx != BRANCH || opEx != NOP) begin
-				reg2Mux = ALU;
-			end
+		if (regDestEx == reg2In && (opEx != SW && opEx != BRANCH && opEx != NOP)) begin
+			reg2Mux = ALU;
 		end
-		else if (regDestMem == reg2In) begin
-			if (opEx != SW || opEx != BRANCH || opEx != NOP) begin
-				reg2Mux = MEM;
-			end
+		else if (regDestMem == reg2In && (opMem != SW && opMem != BRANCH && opMem != NOP)) begin
+			reg2Mux = MEM;
 		end
-		else if (regDestWb == reg2In) begin
-			if (opEx != SW || opEx != BRANCH || opEx != NOP) begin
-				reg2Mux = WB;
-			end
+		else if (regDestWb == reg2In && (opWb != SW && opWb != BRANCH && opWb != NOP)) begin
+			reg2Mux = WB;
+		end
+		else begin
+			reg2Mux = REG;
 		end
 	end
 endmodule
