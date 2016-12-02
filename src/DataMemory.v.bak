@@ -25,7 +25,7 @@ module DataMemory(clk, wrtEn, addr, dIn, sw, key, ledr, hex, dOut);
 			if (wrtEn) begin
 	  			if (addr[2]) ledr <= dIn[9:0];
 				else if (addr[3]) begin end
-				else hex <= (dIn[15:0] == 4'h0bad) ? 4'h0 : dIn[15:0];
+				else hex <= dIn[15:0];
 	      	end else begin
 	      		if (addr[2]) sw_reg <= sw;
 	      		else key_reg <= (~key & 4'hf);

@@ -7,30 +7,29 @@
 //
 // cycle_width specifies the number of bits in the cycle_time parameter.
 //
-module ClockDivider(clk_in, reset, clk_out);
-   parameter cycle_width;
-   parameter cycle_time;
+module ClockDivider(clk_in,
+	clk_out,
+	locked);
 
-   input clk_in;
-   input reset;
+	output	  locked; // clock is paused when locked is 1
 
-   output clk_out;
-   reg    clk_out;
+  // Implement this yourself
+  // Slow down the clock to ensure the cycle is long enough for all operations to execute
+  // If you don't, you might get weird errors
+	input clk_in;
+	output clk_out;
+	parameter counter = 25000000;
+	reg[31:0] clk_count;
+	reg clk = 0;
+	always @ (posedge clk_in) begin
+		if (clk_count == counter) begin
+			clk <= ~clk;
+			clk_count <= 0;
+		end
+		else begin
+			clk_count <= clk_count + 1;
+		end
+	end
+	assign clk_out = clk;
 
-   reg [cycle_width - 1 : 0] counter;
-
-   always @(posedge clk_in or posedge reset) begin
-      if (reset)
-        begin
-           counter <= cycle_time;
-           clk_out <= 1'b0;
-        end
-      else if (counter == {cycle_width{1'b0}})
-        begin
-           counter <= cycle_time - {{cycle_width - 1{1'b0}}, {1{1'b1}}};
-           clk_out <= ~clk_out;
-        end
-      else
-        counter <= counter - {{cycle_width - 1{1'b0}}, {1{1'b1}}};
-   end // always @ (posedge clk_in or posedge reset)
-endmodule // ClockDivider
+endmodule

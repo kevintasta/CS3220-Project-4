@@ -114,15 +114,18 @@ module Project2(SW,KEY,LEDR,HEX0,HEX1,HEX2,HEX3,CLOCK_50,FPGA_RESET_N);
 	wire [DBITS - 1:0] forwardReg1, forwardReg2; // the true values for reg1 and reg2
 	
 	wire isBranch, isJal;							  // represents whether the instruction is a branch or a jal
-	
 	wire isLoadWord;									  // is the instruction a load word which is used to either select alu result or mem read for writeback
 	wire [DBITS - 1:0] truealuResult;               // ALU arithmetic output
+	wire lwStall;										  // load word forwarding stall
+	wire lwBuffered;
+	wire [DBITS-1:0] preStallPc;					  // value of pc before the stall
+	wire locked;
    // Clock divider and reset
    assign reset = ~FPGA_RESET_N;
 	//assign reset = 1'b0;
    // We run at around 25 MHz. Timing analyzer estimates the design can support
    // around 33 MHz if we really wanted to
-   ClockDivider	#(1, 1'b0) clk_divider(CLOCK_50, 1'b0, clk);
+   ClockDivider clk_divider(CLOCK_50, clk, locked);
    
    //debounce SW
    Debouncer SW0(clk, SW[0], debounced_SW[0]);
@@ -144,8 +147,8 @@ module Project2(SW,KEY,LEDR,HEX0,HEX1,HEX2,HEX3,CLOCK_50,FPGA_RESET_N);
 
 	//------------------------INSTRUCTION FETCH--------------------------------------
    // Create PC and its logic
-   Register #(DBITS, START_PC) pc(clk, reset, 1'b1, pcIn, pcOut);
-
+   //Register #(DBITS, START_PC) pc(clk, reset, 1'b1, pcIn, pcOut);
+	PCRegister #(.BIT_WIDTH(DBITS), .RESET_VALUE(START_PC)) pc (clk, 1'b0, 1'b1, pcIn, pcOut);
    // Increment the PC by 4 for use in several places
    Adder #(DBITS) pcIncrementer(pcOut, 32'd4, pcIncremented);
 
@@ -154,14 +157,17 @@ module Project2(SW,KEY,LEDR,HEX0,HEX1,HEX2,HEX3,CLOCK_50,FPGA_RESET_N);
    Adder #(DBITS) brOffsetAdder(brBase, dbuffinstOffset, brBaseOffset);
 
    // Take branch if we flushed which means that the instruciton in execute is a jal or if it is a branch and branch was taken
-   Multiplexer2bit #(DBITS) nextPcMux(pcIncremented, brBaseOffset, iFlush, pcIn);
+   Multiplexer2bit #(DBITS) nextPcMux(pcIncremented, brBaseOffset, iFlush, preStallPc);
+	
+	//Stalls pc for lw forwarding
+	SpecialMultiplexer2bit #(DBITS) stallPc(preStallPc, dbuffPc, dFlush, pcIn);
 
    // Create instruction memory
    InstMemory #(IMEM_INIT_FILE, IMEM_ADDR_BIT_WIDTH, IMEM_DATA_BIT_WIDTH)
        instMem(pcOut[IMEM_PC_BITS_HI - 1: IMEM_PC_BITS_LO], instWord);
 	
 	// Create the instruction fetch buffer
-	IBUFF instructionBuffer(pcIncremented, instWord, clk, iFlush, ibuffPc, ibuffInst);
+	IBUFF instructionBuffer(pcIncremented, instWord, clk, (iFlush | dFlush), ibuffPc, ibuffInst);
 	
 	//------------------------DECODE--------------------------------------
 	// Instruction decoder splits out all pertinent fields
@@ -210,9 +216,9 @@ module Project2(SW,KEY,LEDR,HEX0,HEX1,HEX2,HEX3,CLOCK_50,FPGA_RESET_N);
 	// Figures out if this instruction is a branch or a jal
 	JalCheck BrJalCheck(dbuffopcode, isJal, isBranch);
 	
-	// Flushes the instruction buffer if this instrution is a jal or if this instruction is a branch and the branch is supposed to be taken
+	// Flushes the instruction buffer if this instrution is a jal or if this instruction is a branch and the branch is supposed to be taken or if we need to stall for load word
 	assign iFlush = (isJal == 1'b1 || (isBranch == 1'b1 && condFlag == 1'b1)) ? 1'b1 : 1'b0;
-	
+	assign dFlush = (dbuffisLoadWord == 1'b1) ? 1'b1 : 1'b0;
 	
    // Assign ALU inputs
    assign a = dbuffregData1;
@@ -242,7 +248,7 @@ module Project2(SW,KEY,LEDR,HEX0,HEX1,HEX2,HEX3,CLOCK_50,FPGA_RESET_N);
 	
 	//------------------------FORWARDING UNIT--------------------------------------
 	//Forwarding transcends states
-	Forwarding FU(opcode, dbuffopcode, ebuffopcode, mbuffopcode, regRead1No, regRead2No, dbuffregWriteNo, ebuffregWriteNo, mbuffregWriteNo, reg1Mux, reg2Mux);
+	Forwarding FU(opcode, dbuffopcode, ebuffopcode, mbuffopcode, regRead1No, regRead2No, dbuffregWriteNo, ebuffregWriteNo, mbuffregWriteNo, reg1Mux, reg2Mux, dbuffisLoadWord, lwStall);
 	
 	//Forwarding multiplexers
 	ForwardMux FM1(regData1, truealuResult, wrRegData, mbuffwrRegData, reg1Mux, forwardReg1);

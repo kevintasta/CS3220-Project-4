@@ -11,7 +11,7 @@ module DBUFF(incPC, src1RegIn, src2RegIn, sextIn, offsetIn, aluOpIn, aluCmpIn, a
 	
 	always @(posedge clk) begin
 		if (flush == 1'b1) begin
-			{incPCOut, src1RegOut, src2RegOut, sextOut, aluOpOut, aluSelOut, destRegOut, regWrEnOut, memWrEnOut} <= 0;
+			{incPCOut, src1RegOut, src2RegOut, sextOut, offsetOut, aluOpOut, aluCmpOut, aluSelOut, destRegOut, regWrEnOut, memWrEnOut, isLWOut, opOut, dstRegMuxOut} <= 0;
 		end
 		else begin
 			incPCOut <= incPC;
