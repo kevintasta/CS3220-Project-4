@@ -3,13 +3,13 @@
 // Description     : A single-cycle processor
 // Author          : Lucas Christian and Joon Choi
 //
-module Project2(SW,KEY,LEDR,HEX0,HEX1,HEX2,HEX3,CLOCK_50,FPGA_RESET_N);
+module Project2(SW,KEY,LEDR,HEX0,HEX1,HEX2,HEX3,HEX4,CLOCK_50,FPGA_RESET_N);
    input  [9:0] SW;
    input  [3:0] KEY;
    input  CLOCK_50;
    input  FPGA_RESET_N;
    output [9:0] LEDR;
-   output [6:0] HEX0,HEX1,HEX2,HEX3;
+   output [6:0] HEX0,HEX1,HEX2,HEX3,HEX4;
 
    parameter DBITS         				 = 32;
    parameter INST_SIZE      			 = 32'd4;
@@ -144,6 +144,7 @@ module Project2(SW,KEY,LEDR,HEX0,HEX1,HEX2,HEX3,CLOCK_50,FPGA_RESET_N);
    SevenSeg hex1Disp(hex[7:4], HEX1);
    SevenSeg hex2Disp(hex[11:8], HEX2);
    SevenSeg hex3Disp(hex[15:12], HEX3);
+	SevenSeg hex4Disp({(3){KEY[0]}}, HEX4);
 
 	//------------------------INSTRUCTION FETCH--------------------------------------
    // Create PC and its logic
