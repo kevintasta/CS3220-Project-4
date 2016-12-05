@@ -1,4 +1,4 @@
-module DataMemory(clk, wrtEn, addr, dIn, sw, key, ledr, hex, dOut);
+module DataMemory(clk, wrtEn, addr, dIn, dIn2, addr2, sw, key, ledr, hex, dOut, dOut2);
 	parameter MEM_INIT_FILE;
 	parameter ADDR_BIT_WIDTH = 32;
 	parameter DATA_BIT_WIDTH = 32;
@@ -10,9 +10,12 @@ module DataMemory(clk, wrtEn, addr, dIn, sw, key, ledr, hex, dOut);
 	input [9:0] sw;
 	input [ADDR_BIT_WIDTH - 1 : 0] addr;
 	input [DATA_BIT_WIDTH - 1 : 0] dIn;
+	input dIn2;
+	input [ADDR_BIT_WIDTH - 1 : 0] addr2;
 	output [DATA_BIT_WIDTH - 1 : 0] dOut;
 	output reg [9:0] ledr;	
 	output reg [15:0] hex;
+	output dOut2;
     
 	(* ram_init_file = MEM_INIT_FILE *)
 	reg [DATA_BIT_WIDTH - 1 : 0] data [0 : N_WORDS - 1];
@@ -32,10 +35,32 @@ module DataMemory(clk, wrtEn, addr, dIn, sw, key, ledr, hex, dOut);
 	      	end
       	end
     end
+	 
+	assign dOut2 = dOut21;
 
 	always @(negedge clk) begin
 		if (wrtEn && !addr[29]) data[addr[13:2]] <= dIn;	
 		addr_reg <= addr[13:2];									
+	end
+	
+	reg dOut21 = 1'b0;
+	reg[3:0] dOut2Temp = 4'd0;
+	
+	always @(posedge dIn2) begin
+		if(addr2 != 32'h000002b0) begin
+			dOut21 <= 1'b1;
+		end else begin
+			if(dOut2Temp < 4'd2) begin
+				dOut2Temp <= dOut2Temp + 1;
+			end else begin
+				dOut2Temp = 4'd0;
+				dOut21 <= 1'b1;
+			end	
+		end
+	end
+	
+	always @(negedge dIn2) beg
+		dOut21 <= 1'b0;
 	end
 
 	assign dOut = addr[29] ? (addr[2] ? sw_reg : key_reg) : data[addr_reg];

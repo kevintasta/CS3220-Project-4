@@ -1,0 +1,51 @@
+module GSharePredictor(clk, predictPC, updatePC, predict, update, reality, prediction);	
+	
+	input clk;						// clock
+	input[15:0] predictPC; 		// PC to make prediction for	
+	input[15:0] updatePC; 		// PC to update with branch taken
+	input predict; 				// predict if hi
+	input update; 					// update predictor if hi
+	input reality; 				// if branch was actually taken or not 
+	output prediction; 			// output prediction
+
+	parameter PC_CHUNK_WIDTH = 12;
+	parameter HISTORY_WIDTH = 11;
+	
+	reg [PC_CHUNK_WIDTH - 1:0] PHT[HISTORY_WIDTH - 1:0]; 		// initialize Pattern History Table
+	reg [PC_CHUNK_WIDTH - 1:0] BHT[1:0] 							// initialize Branch History Table
+	
+	reg predReg = 1'b0;
+	
+	wire[PC_CHUNK_WIDTH - 1:0] bhtIndex;
+	wire[PC_CHUNK_WIDTH - 1:0] pcChunk;
+	
+	assign predictPcChunk = predictPC[PC_CHUNK_WIDTH - 1:0]];
+	assign updatePcChunk = updatePC[PC_CHUNK_WIDTH - 1:0]];
+	
+	assign predictBhtIndex = PHT[predictPcChunk] ^ predictPcChunk;
+	assign updateBhtIndex = PHT[updatePcChunk] ^ updatePcChunk;
+			
+	always @(posedge clk) begin
+		if(predict == 1'b1) begin
+			predReg <= BHT[predictBhtIndex][1];
+		end
+		
+		if(update = 1'b1) begin
+			// update BHT
+			if(reality == 1'b1) begin
+				if(BHT[updateBhtIndex] != 2'b11) begin
+					BHT[updateBhtIndex] <= BHT[updateBhtIndex] + 1;
+				end
+			end else begin
+				if(BHT[updateBhtIndex] != 2'b00) begin
+					BHT[updateBhtIndex] <= BHT[updateBhtIndex] - 1;
+				end
+			end
+			
+			// update PHT
+			PHT[updatePcChunk] <= PHT[updatePcChunk] << 1;
+			PHT[updatePcChunk][0] <= reality;
+		end
+	end
+	
+endmodule
