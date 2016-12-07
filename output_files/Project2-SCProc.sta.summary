@@ -2,100 +2,148 @@
 TimeQuest Timing Analyzer Summary
 ------------------------------------------------------------
 
-Type  : Slow 1100mV 85C Model Setup 'ClockDivider:clk_divider|clk_out'
-Slack : -16.885
-TNS   : -10719.343
+Type  : Slow 1100mV 85C Model Setup 'DataMemory:datamem|dOut21'
+Slack : -9.060
+TNS   : -4652.298
+
+Type  : Slow 1100mV 85C Model Setup 'ClockDivider:clk_divider|clk'
+Slack : -6.872
+TNS   : -33.931
 
 Type  : Slow 1100mV 85C Model Setup 'CLOCK_50'
-Slack : -0.438
-TNS   : -0.875
+Slack : -3.310
+TNS   : -103.560
 
 Type  : Slow 1100mV 85C Model Hold 'CLOCK_50'
-Slack : -1.537
-TNS   : -1.537
+Slack : -1.518
+TNS   : -1.518
 
-Type  : Slow 1100mV 85C Model Hold 'ClockDivider:clk_divider|clk_out'
-Slack : 0.469
+Type  : Slow 1100mV 85C Model Hold 'ClockDivider:clk_divider|clk'
+Slack : -0.648
+TNS   : -0.648
+
+Type  : Slow 1100mV 85C Model Hold 'DataMemory:datamem|dOut21'
+Slack : 0.460
 TNS   : 0.000
 
-Type  : Slow 1100mV 85C Model Minimum Pulse Width 'ClockDivider:clk_divider|clk_out'
+Type  : Slow 1100mV 85C Model Minimum Pulse Width 'DataMemory:datamem|dOut21'
 Slack : -2.636
-TNS   : -1507.525
+TNS   : -1837.934
 
 Type  : Slow 1100mV 85C Model Minimum Pulse Width 'CLOCK_50'
 Slack : -0.538
-TNS   : -1.554
+TNS   : -25.543
 
-Type  : Slow 1100mV 0C Model Setup 'ClockDivider:clk_divider|clk_out'
-Slack : -16.415
-TNS   : -10543.827
+Type  : Slow 1100mV 85C Model Minimum Pulse Width 'ClockDivider:clk_divider|clk'
+Slack : -0.538
+TNS   : -4.409
+
+Type  : Slow 1100mV 0C Model Setup 'DataMemory:datamem|dOut21'
+Slack : -8.895
+TNS   : -4499.496
+
+Type  : Slow 1100mV 0C Model Setup 'ClockDivider:clk_divider|clk'
+Slack : -6.963
+TNS   : -34.253
 
 Type  : Slow 1100mV 0C Model Setup 'CLOCK_50'
-Slack : -0.423
-TNS   : -0.833
+Slack : -3.585
+TNS   : -104.613
 
 Type  : Slow 1100mV 0C Model Hold 'CLOCK_50'
-Slack : -1.551
-TNS   : -1.551
+Slack : -1.461
+TNS   : -1.461
 
-Type  : Slow 1100mV 0C Model Hold 'ClockDivider:clk_divider|clk_out'
-Slack : 0.501
+Type  : Slow 1100mV 0C Model Hold 'ClockDivider:clk_divider|clk'
+Slack : -0.465
+TNS   : -0.465
+
+Type  : Slow 1100mV 0C Model Hold 'DataMemory:datamem|dOut21'
+Slack : 0.437
 TNS   : 0.000
 
-Type  : Slow 1100mV 0C Model Minimum Pulse Width 'ClockDivider:clk_divider|clk_out'
+Type  : Slow 1100mV 0C Model Minimum Pulse Width 'DataMemory:datamem|dOut21'
 Slack : -2.636
-TNS   : -1474.179
+TNS   : -1803.779
 
 Type  : Slow 1100mV 0C Model Minimum Pulse Width 'CLOCK_50'
 Slack : -0.538
-TNS   : -1.557
+TNS   : -26.995
 
-Type  : Fast 1100mV 85C Model Setup 'ClockDivider:clk_divider|clk_out'
-Slack : -8.690
-TNS   : -5358.022
+Type  : Slow 1100mV 0C Model Minimum Pulse Width 'ClockDivider:clk_divider|clk'
+Slack : -0.538
+TNS   : -4.372
+
+Type  : Fast 1100mV 85C Model Setup 'DataMemory:datamem|dOut21'
+Slack : -4.233
+TNS   : -2031.011
+
+Type  : Fast 1100mV 85C Model Setup 'ClockDivider:clk_divider|clk'
+Slack : -3.111
+TNS   : -15.193
 
 Type  : Fast 1100mV 85C Model Setup 'CLOCK_50'
-Slack : -0.542
-TNS   : -0.542
+Slack : -1.371
+TNS   : -36.501
 
 Type  : Fast 1100mV 85C Model Hold 'CLOCK_50'
-Slack : -0.643
-TNS   : -0.643
+Slack : -0.588
+TNS   : -0.588
 
-Type  : Fast 1100mV 85C Model Hold 'ClockDivider:clk_divider|clk_out'
-Slack : 0.183
+Type  : Fast 1100mV 85C Model Hold 'ClockDivider:clk_divider|clk'
+Slack : -0.531
+TNS   : -0.531
+
+Type  : Fast 1100mV 85C Model Hold 'DataMemory:datamem|dOut21'
+Slack : 0.182
 TNS   : 0.000
 
-Type  : Fast 1100mV 85C Model Minimum Pulse Width 'ClockDivider:clk_divider|clk_out'
+Type  : Fast 1100mV 85C Model Minimum Pulse Width 'DataMemory:datamem|dOut21'
 Slack : -2.174
-TNS   : -688.030
+TNS   : -681.241
 
 Type  : Fast 1100mV 85C Model Minimum Pulse Width 'CLOCK_50'
-Slack : -0.233
-TNS   : -0.465
+Slack : -0.392
+TNS   : -3.181
 
-Type  : Fast 1100mV 0C Model Setup 'ClockDivider:clk_divider|clk_out'
-Slack : -7.728
-TNS   : -4760.659
+Type  : Fast 1100mV 85C Model Minimum Pulse Width 'ClockDivider:clk_divider|clk'
+Slack : -0.023
+TNS   : -0.111
+
+Type  : Fast 1100mV 0C Model Setup 'DataMemory:datamem|dOut21'
+Slack : -3.765
+TNS   : -1722.748
+
+Type  : Fast 1100mV 0C Model Setup 'ClockDivider:clk_divider|clk'
+Slack : -2.953
+TNS   : -14.390
 
 Type  : Fast 1100mV 0C Model Setup 'CLOCK_50'
-Slack : -0.349
-TNS   : -0.349
+Slack : -1.269
+TNS   : -31.506
 
 Type  : Fast 1100mV 0C Model Hold 'CLOCK_50'
-Slack : -0.695
-TNS   : -0.695
+Slack : -0.607
+TNS   : -0.607
 
-Type  : Fast 1100mV 0C Model Hold 'ClockDivider:clk_divider|clk_out'
-Slack : 0.173
+Type  : Fast 1100mV 0C Model Hold 'ClockDivider:clk_divider|clk'
+Slack : -0.478
+TNS   : -0.478
+
+Type  : Fast 1100mV 0C Model Hold 'DataMemory:datamem|dOut21'
+Slack : 0.172
 TNS   : 0.000
 
-Type  : Fast 1100mV 0C Model Minimum Pulse Width 'ClockDivider:clk_divider|clk_out'
+Type  : Fast 1100mV 0C Model Minimum Pulse Width 'DataMemory:datamem|dOut21'
 Slack : -2.174
-TNS   : -682.323
+TNS   : -681.633
 
 Type  : Fast 1100mV 0C Model Minimum Pulse Width 'CLOCK_50'
-Slack : -0.245
-TNS   : -0.487
+Slack : -0.386
+TNS   : -3.265
+
+Type  : Fast 1100mV 0C Model Minimum Pulse Width 'ClockDivider:clk_divider|clk'
+Slack : 0.011
+TNS   : 0.000
 
 ------------------------------------------------------------

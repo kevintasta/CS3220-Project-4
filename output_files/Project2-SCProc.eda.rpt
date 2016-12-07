@@ -1,5 +1,5 @@
 EDA Netlist Writer report for Project2-SCProc
-Sun Nov 27 17:04:54 2016
+Mon Dec 05 13:43:23 2016
 Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
 
 
@@ -36,7 +36,7 @@ applicable agreement for further details.
 +-------------------------------------------------------------------+
 ; EDA Netlist Writer Summary                                        ;
 +---------------------------+---------------------------------------+
-; EDA Netlist Writer Status ; Successful - Sun Nov 27 17:04:54 2016 ;
+; EDA Netlist Writer Status ; Successful - Mon Dec 05 13:43:23 2016 ;
 ; Revision Name             ; Project2-SCProc                       ;
 ; Top-level Entity Name     ; Project2                              ;
 ; Family                    ; Cyclone V                             ;
@@ -66,13 +66,13 @@ applicable agreement for further details.
 +---------------------------------------------------------------------------------------------------+---------------------------+
 
 
-+---------------------------------------------------------------------------------------------------------------------------+
-; Simulation Generated Files                                                                                                ;
-+---------------------------------------------------------------------------------------------------------------------------+
-; Generated Files                                                                                                           ;
-+---------------------------------------------------------------------------------------------------------------------------+
-; C:/Users/Yuanhan/Documents/2016-2017/CS 3220/Project+2+Template/Project 2 Template/simulation/modelsim/Project2-SCProc.vo ;
-+---------------------------------------------------------------------------------------------------------------------------+
++------------------------------------------------------------------------+
+; Simulation Generated Files                                             ;
++------------------------------------------------------------------------+
+; Generated Files                                                        ;
++------------------------------------------------------------------------+
+; D:/Programming/CS3220-Project-4/simulation/modelsim/Project2-SCProc.vo ;
++------------------------------------------------------------------------+
 
 
 +-----------------------------+
@@ -81,13 +81,13 @@ applicable agreement for further details.
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit EDA Netlist Writer
     Info: Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
-    Info: Processing started: Sun Nov 27 17:04:53 2016
+    Info: Processing started: Mon Dec 05 13:43:21 2016
 Info: Command: quartus_eda --read_settings_files=off --write_settings_files=off Project2-SCProc -c Project2-SCProc
 Warning (10905): Generated the EDA functional simulation files although EDA timing simulation option is chosen.
-Info (204019): Generated file Project2-SCProc.vo in folder "C:/Users/Yuanhan/Documents/2016-2017/CS 3220/Project+2+Template/Project 2 Template/simulation/modelsim/" for EDA simulation tool
+Info (204019): Generated file Project2-SCProc.vo in folder "D:/Programming/CS3220-Project-4/simulation/modelsim/" for EDA simulation tool
 Info: Quartus II 64-Bit EDA Netlist Writer was successful. 0 errors, 1 warning
-    Info: Peak virtual memory: 512 megabytes
-    Info: Processing ended: Sun Nov 27 17:04:55 2016
+    Info: Peak virtual memory: 524 megabytes
+    Info: Processing ended: Mon Dec 05 13:43:23 2016
     Info: Elapsed time: 00:00:02
     Info: Total CPU time (on all processors): 00:00:02
 

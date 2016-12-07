@@ -44,23 +44,27 @@ module DataMemory(clk, wrtEn, addr, dIn, dIn2, addr2, sw, key, ledr, hex, dOut, 
 	end
 	
 	reg dOut21 = 1'b0;
-	reg[3:0] dOut2Temp = 4'd0;
+	reg last = 1'b0;
+	reg[1:0] counts = 2'b00;
+	reg countsEn = 1'b0;
 	
 	always @(posedge dIn2) begin
-		if(addr2 != 32'h000002b0) begin
-			dOut21 <= 1'b1;
+		if(addr2 !== 32'h000002ac) begin
+			dOut21 <= ~dOut21;
 		end else begin
-			if(dOut2Temp < 4'd2) begin
-				dOut2Temp <= dOut2Temp + 1;
-			end else begin
-				dOut2Temp = 4'd0;
-				dOut21 <= 1'b1;
-			end	
+			if(countsEn == 1'b1) begin
+				counts = counts + 1;
+			end
+			if(counts == 2'b11) begin
+				dOut21 <= ~dOut21;
+			end
+			if(key == 4'b1111 && last == 1'b1) begin
+				countsEn = 1'b1;
+			end
+			if(key != 4'b1111) begin
+				last <= 1'b1;
+			end
 		end
-	end
-	
-	always @(negedge dIn2) beg
-		dOut21 <= 1'b0;
 	end
 
 	assign dOut = addr[29] ? (addr[2] ? sw_reg : key_reg) : data[addr_reg];

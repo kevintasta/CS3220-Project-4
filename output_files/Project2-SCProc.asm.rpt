@@ -1,5 +1,5 @@
 Assembler report for Project2-SCProc
-Sun Nov 27 17:04:30 2016
+Mon Dec 05 13:43:04 2016
 Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
 
 
@@ -10,7 +10,7 @@ Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edit
   2. Assembler Summary
   3. Assembler Settings
   4. Assembler Generated Files
-  5. Assembler Device Options: C:/Users/Yuanhan/Documents/2016-2017/CS 3220/Project+2+Template/Project 2 Template/output_files/Project2-SCProc.sof
+  5. Assembler Device Options: D:/Programming/CS3220-Project-4/output_files/Project2-SCProc.sof
   6. Assembler Messages
 
 
@@ -37,7 +37,7 @@ applicable agreement for further details.
 +---------------------------------------------------------------+
 ; Assembler Summary                                             ;
 +-----------------------+---------------------------------------+
-; Assembler Status      ; Successful - Sun Nov 27 17:04:30 2016 ;
+; Assembler Status      ; Successful - Mon Dec 05 13:43:04 2016 ;
 ; Revision Name         ; Project2-SCProc                       ;
 ; Top-level Entity Name ; Project2                              ;
 ; Family                ; Cyclone V                             ;
@@ -77,24 +77,24 @@ applicable agreement for further details.
 +-----------------------------------------------------------------------------+----------+---------------+
 
 
-+---------------------------------------------------------------------------------------------------------------------+
-; Assembler Generated Files                                                                                           ;
-+---------------------------------------------------------------------------------------------------------------------+
-; File Name                                                                                                           ;
-+---------------------------------------------------------------------------------------------------------------------+
-; C:/Users/Yuanhan/Documents/2016-2017/CS 3220/Project+2+Template/Project 2 Template/output_files/Project2-SCProc.sof ;
-+---------------------------------------------------------------------------------------------------------------------+
++------------------------------------------------------------------+
+; Assembler Generated Files                                        ;
++------------------------------------------------------------------+
+; File Name                                                        ;
++------------------------------------------------------------------+
+; D:/Programming/CS3220-Project-4/output_files/Project2-SCProc.sof ;
++------------------------------------------------------------------+
 
 
-+-----------------------------------------------------------------------------------------------------------------------------------------------+
-; Assembler Device Options: C:/Users/Yuanhan/Documents/2016-2017/CS 3220/Project+2+Template/Project 2 Template/output_files/Project2-SCProc.sof ;
-+----------------+------------------------------------------------------------------------------------------------------------------------------+
-; Option         ; Setting                                                                                                                      ;
-+----------------+------------------------------------------------------------------------------------------------------------------------------+
-; Device         ; 5CEBA4F23C7                                                                                                                  ;
-; JTAG usercode  ; 0x0086BC0E                                                                                                                   ;
-; Checksum       ; 0x0086BC0E                                                                                                                   ;
-+----------------+------------------------------------------------------------------------------------------------------------------------------+
++--------------------------------------------------------------------------------------------+
+; Assembler Device Options: D:/Programming/CS3220-Project-4/output_files/Project2-SCProc.sof ;
++----------------+---------------------------------------------------------------------------+
+; Option         ; Setting                                                                   ;
++----------------+---------------------------------------------------------------------------+
+; Device         ; 5CEBA4F23C7                                                               ;
+; JTAG usercode  ; 0x008850D8                                                                ;
+; Checksum       ; 0x008850D8                                                                ;
++----------------+---------------------------------------------------------------------------+
 
 
 +--------------------+
@@ -103,13 +103,13 @@ applicable agreement for further details.
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit Assembler
     Info: Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
-    Info: Processing started: Sun Nov 27 17:04:22 2016
+    Info: Processing started: Mon Dec 05 13:42:59 2016
 Info: Command: quartus_asm --read_settings_files=off --write_settings_files=off Project2-SCProc -c Project2-SCProc
 Info (115030): Assembler is generating device programming files
 Info: Quartus II 64-Bit Assembler was successful. 0 errors, 0 warnings
-    Info: Peak virtual memory: 602 megabytes
-    Info: Processing ended: Sun Nov 27 17:04:30 2016
-    Info: Elapsed time: 00:00:08
-    Info: Total CPU time (on all processors): 00:00:06
+    Info: Peak virtual memory: 605 megabytes
+    Info: Processing ended: Mon Dec 05 13:43:04 2016
+    Info: Elapsed time: 00:00:05
+    Info: Total CPU time (on all processors): 00:00:05
 
 

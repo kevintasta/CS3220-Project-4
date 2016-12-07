@@ -58,6 +58,7 @@ module Project2(SW,KEY,LEDR,HEX0,HEX1,HEX2,HEX3,HEX4,CLOCK_50,FPGA_RESET_N);
    wire [3:0] aluOp;                           // ALU arithmetic function opcode
    wire [3:0] cmpOp;                           // ALU comparison function opcode
    wire [1:0] dstRegMuxSel;                    // dstRegMux select signal
+	wire clk2;											  // debug clock
    wire wrMem;                                 // write enable for data memory
    wire wrReg;                                 // write enable for register file
    wire [3:0] regWriteNo;                      // destination reg. number
@@ -72,6 +73,9 @@ module Project2(SW,KEY,LEDR,HEX0,HEX1,HEX2,HEX3,HEX4,CLOCK_50,FPGA_RESET_N);
    wire condFlag;                              // ALU condition flag output
    wire [DBITS - 1:0] condRegResult;           // ALU condition flag result zero-extended
    wire [DBITS - 1:0] dataMemOut;              // Data memory output
+	wire [DBITS - 1:0] dataIn2;              	  // Data memory input data
+	wire [DBITS - 1:0] dataAddr2;               // Data memory input address
+	wire [DBITS - 1:0] dataOut2;                // Data memory second output
    wire [9:0] debounced_SW;                    // debounced switches
 	wire iFlush, dFlush, eFlush, mFlush;		  // flush signals for buffers
 	
@@ -125,7 +129,7 @@ module Project2(SW,KEY,LEDR,HEX0,HEX1,HEX2,HEX3,HEX4,CLOCK_50,FPGA_RESET_N);
 	//assign reset = 1'b0;
    // We run at around 25 MHz. Timing analyzer estimates the design can support
    // around 33 MHz if we really wanted to
-   ClockDivider clk_divider(CLOCK_50, clk, locked);
+   ClockDivider clk_divider(CLOCK_50, clk2, locked);
    
    //debounce SW
    Debouncer SW0(clk, SW[0], debounced_SW[0]);
@@ -198,6 +202,9 @@ module Project2(SW,KEY,LEDR,HEX0,HEX1,HEX2,HEX3,HEX4,CLOCK_50,FPGA_RESET_N);
 
    // Create the register file
    assign regWriteNo = rd;
+	assign dataAddr2 = pcOut;
+	assign clk = dataOut2;
+	assign dataIn2 = clk2;
    Multiplexer2bit #(4) rs1Mux(rs1, rd, rs1MuxSel, regRead1No);
    Multiplexer4bit #(4) rs2Mux(rs2, rd, rs1, 4'b0, rs2MuxSel, regRead2No);
    
@@ -233,7 +240,7 @@ module Project2(SW,KEY,LEDR,HEX0,HEX1,HEX2,HEX3,HEX4,CLOCK_50,FPGA_RESET_N);
 	//------------------------MEMORY--------------------------------------
    // Create Data Memory
    DataMemory #(IMEM_INIT_FILE)
-      datamem(clk, ebuffwrMem, ebuffaluResult, ebuffregData2, debounced_SW, KEY, LEDR, hex, dataMemOut);
+      datamem(clk, ebuffwrMem, ebuffaluResult, ebuffregData2, dataIn2, dataAddr2, debounced_SW, KEY, LEDR, hex, dataMemOut, dataOut2);
    // KEYS, SWITCHES, HEXS, and LEDS are memory mapped IO
 	
 	Multiplexer4bit #(DBITS) dstRegMux(ebuffaluResult, dataMemOut, ebuffPc,

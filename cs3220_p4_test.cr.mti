@@ -1,0 +1,218 @@
+D:/Programming/CS3220-Project-4/src/SpecialMultiplexer2bit.v {1 {vlog -work work D:/Programming/CS3220-Project-4/src/SpecialMultiplexer2bit.v
+Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+-- Compiling module SpecialMultiplexer2bit
+
+Top level modules:
+	SpecialMultiplexer2bit
+
+} {} {}} D:/Programming/CS3220-Project-4/src/Shiftbit.v {1 {vlog -work work D:/Programming/CS3220-Project-4/src/Shiftbit.v
+Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+-- Compiling module Shiftbit
+
+Top level modules:
+	Shiftbit
+
+} {} {}} D:/Programming/CS3220-Project-4/src/BranchOffset.v {1 {vlog -work work D:/Programming/CS3220-Project-4/src/BranchOffset.v
+Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+-- Compiling module BranchOffset
+
+Top level modules:
+	BranchOffset
+
+} {} {}} D:/Programming/CS3220-Project-4/src/SignExtension.v {1 {vlog -work work D:/Programming/CS3220-Project-4/src/SignExtension.v
+Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+-- Compiling module SignExtension
+
+Top level modules:
+	SignExtension
+
+} {} {}} D:/Programming/CS3220-Project-4/src/Multiplexer4bit.v {1 {vlog -work work D:/Programming/CS3220-Project-4/src/Multiplexer4bit.v
+Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+-- Compiling module Multiplexer4bit
+
+Top level modules:
+	Multiplexer4bit
+
+} {} {}} D:/Programming/CS3220-Project-4/src/Decoder.v {1 {vlog -work work D:/Programming/CS3220-Project-4/src/Decoder.v
+Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+-- Compiling module Decoder
+
+Top level modules:
+	Decoder
+
+} {} {}} D:/Programming/CS3220-Project-4/src/GSharePredictor.v {1 {vlog -work work D:/Programming/CS3220-Project-4/src/GSharePredictor.v
+Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+-- Compiling module GSharePredictor
+
+Top level modules:
+	GSharePredictor
+
+} {} {}} D:/Programming/CS3220-Project-4/src/InstMemory.v {1 {vlog -work work D:/Programming/CS3220-Project-4/src/InstMemory.v
+Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+-- Compiling module InstMemory
+
+Top level modules:
+	InstMemory
+
+} {} {}} D:/Programming/CS3220-Project-4/src/TestPSharePredictor.v {1 {vlog -work work D:/Programming/CS3220-Project-4/src/TestPSharePredictor.v
+Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+-- Compiling module TestPSharePredictor
+
+Top level modules:
+	TestPSharePredictor
+
+} {} {}} D:/Programming/CS3220-Project-4/src/Debouncer.v {1 {vlog -work work D:/Programming/CS3220-Project-4/src/Debouncer.v
+Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+-- Compiling module Debouncer
+
+Top level modules:
+	Debouncer
+
+} {} {}} D:/Programming/CS3220-Project-4/src/MBUFF.v {1 {vlog -work work D:/Programming/CS3220-Project-4/src/MBUFF.v
+Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+-- Compiling module MBUFF
+
+Top level modules:
+	MBUFF
+
+} {} {}} D:/Programming/CS3220-Project-4/src/Project2.v {1 {vlog -work work D:/Programming/CS3220-Project-4/src/Project2.v
+Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+-- Compiling module Project2
+
+Top level modules:
+	Project2
+
+} {} {}} D:/Programming/CS3220-Project-4/src/TournamentPredictor.v {1 {vlog -work work D:/Programming/CS3220-Project-4/src/TournamentPredictor.v
+Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+-- Compiling module TournamentPredictor
+
+Top level modules:
+	TournamentPredictor
+
+} {} {}} D:/Programming/CS3220-Project-4/src/Alu.v {1 {vlog -work work D:/Programming/CS3220-Project-4/src/Alu.v
+Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+-- Compiling module Alu
+
+Top level modules:
+	Alu
+
+} {} {}} D:/Programming/CS3220-Project-4/src/TestDataMemory.v {1 {vlog -work work {D:\Programming\CS3220-Project-4\src\TestDataMemory.v}
+Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+-- Compiling module TestDataMemory
+
+Top level modules:
+	TestDataMemory
+
+} {} {}} D:/Programming/CS3220-Project-4/src/Forwarding.v {1 {vlog -work work D:/Programming/CS3220-Project-4/src/Forwarding.v
+Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+-- Compiling module Forwarding
+
+Top level modules:
+	Forwarding
+
+} {} {}} D:/Programming/CS3220-Project-4/src/RegisterFile.v {1 {vlog -work work D:/Programming/CS3220-Project-4/src/RegisterFile.v
+Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+-- Compiling module RegisterFile
+
+Top level modules:
+	RegisterFile
+
+} {} {}} D:/Programming/CS3220-Project-4/src/Register.v {1 {vlog -work work D:/Programming/CS3220-Project-4/src/Register.v
+Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+-- Compiling module Register
+
+Top level modules:
+	Register
+
+} {} {}} D:/Programming/CS3220-Project-4/src/JalCheck.v {1 {vlog -work work D:/Programming/CS3220-Project-4/src/JalCheck.v
+Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+-- Compiling module JalCheck
+
+Top level modules:
+	JalCheck
+
+} {} {}} D:/Programming/CS3220-Project-4/src/SCProcController.v {1 {vlog -work work D:/Programming/CS3220-Project-4/src/SCProcController.v
+Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+-- Compiling module SCProcController
+
+Top level modules:
+	SCProcController
+
+} {} {}} D:/Programming/CS3220-Project-4/src/TestGSharePredictor.v {1 {vlog -work work D:/Programming/CS3220-Project-4/src/TestGSharePredictor.v
+Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+-- Compiling module TestGSharePredictor
+
+Top level modules:
+	TestGSharePredictor
+
+} {} {}} D:/Programming/CS3220-Project-4/src/ForwardMux.v {1 {vlog -work work D:/Programming/CS3220-Project-4/src/ForwardMux.v
+Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+-- Compiling module ForwardMux
+
+Top level modules:
+	ForwardMux
+
+} {} {}} D:/Programming/CS3220-Project-4/src/PSharePredictor.v {1 {vlog -work work D:/Programming/CS3220-Project-4/src/PSharePredictor.v
+Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+-- Compiling module PSharePredictor
+
+Top level modules:
+	PSharePredictor
+
+} {} {}} D:/Programming/CS3220-Project-4/src/DBUFF.v {1 {vlog -work work D:/Programming/CS3220-Project-4/src/DBUFF.v
+Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+-- Compiling module DBUFF
+
+Top level modules:
+	DBUFF
+
+} {} {}} D:/Programming/CS3220-Project-4/src/SevenSeg.v {1 {vlog -work work D:/Programming/CS3220-Project-4/src/SevenSeg.v
+Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+-- Compiling module SevenSeg
+
+Top level modules:
+	SevenSeg
+
+} {} {}} D:/Programming/CS3220-Project-4/src/PCRegister.v {1 {vlog -work work D:/Programming/CS3220-Project-4/src/PCRegister.v
+Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+-- Compiling module PCRegister
+
+Top level modules:
+	PCRegister
+
+} {} {}} D:/Programming/CS3220-Project-4/src/EBUFF.v {1 {vlog -work work D:/Programming/CS3220-Project-4/src/EBUFF.v
+Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+-- Compiling module EBUFF
+
+Top level modules:
+	EBUFF
+
+} {} {}} D:/Programming/CS3220-Project-4/src/Adder.v {1 {vlog -work work D:/Programming/CS3220-Project-4/src/Adder.v
+Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+-- Compiling module Adder
+
+Top level modules:
+	Adder
+
+} {} {}} D:/Programming/CS3220-Project-4/src/TestTournamentPredictor.v {1 {vlog -work work D:/Programming/CS3220-Project-4/src/TestTournamentPredictor.v
+Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+-- Compiling module TestTournamentPredictor
+
+Top level modules:
+	TestTournamentPredictor
+
+} {} {}} D:/Programming/CS3220-Project-4/src/Multiplexer2bit.v {1 {vlog -work work D:/Programming/CS3220-Project-4/src/Multiplexer2bit.v
+Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+-- Compiling module Multiplexer2bit
+
+Top level modules:
+	Multiplexer2bit
+
+} {} {}} D:/Programming/CS3220-Project-4/src/IBUFF.v {1 {vlog -work work D:/Programming/CS3220-Project-4/src/IBUFF.v
+Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+-- Compiling module IBUFF
+
+Top level modules:
+	IBUFF
+
+} {} {}}

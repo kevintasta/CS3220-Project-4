@@ -1,13 +1,13 @@
-Fitter Status : Successful - Sun Nov 27 17:04:17 2016
+Fitter Status : Successful - Mon Dec 05 13:42:57 2016
 Quartus II 64-Bit Version : 13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition
 Revision Name : Project2-SCProc
 Top-level Entity Name : Project2
 Family : Cyclone V
 Device : 5CEBA4F23C7
 Timing Models : Final
-Logic utilization (in ALMs) : 974 / 18,480 ( 5 % )
-Total registers : 777
-Total pins : 54 / 224 ( 24 % )
+Logic utilization (in ALMs) : 1,025 / 18,480 ( 6 % )
+Total registers : 1221
+Total pins : 61 / 224 ( 27 % )
 Total virtual pins : 0
 Total block memory bits : 65,536 / 3,153,920 ( 2 % )
 Total DSP Blocks : 0 / 66 ( 0 % )

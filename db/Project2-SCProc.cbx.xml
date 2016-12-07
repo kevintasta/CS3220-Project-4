@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <LOG_ROOT>
 	<PROJECT NAME="Project2-SCProc">
-		<CBX_INST_ENTRY INSTANCE_NAME="|Project2|DataMemory:datamem|altsyncram:data_rtl_0" CBX_FILE_NAME="altsyncram_g2e1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|Project2|DataMemory:datamem|altsyncram:data_rtl_0" CBX_FILE_NAME="altsyncram_7mc1.tdf"/>
 	</PROJECT>
 </LOG_ROOT>

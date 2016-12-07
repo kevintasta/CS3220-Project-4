@@ -18,7 +18,7 @@ module ClockDivider(clk_in,
   // If you don't, you might get weird errors
 	input clk_in;
 	output clk_out;
-	parameter counter = 25000000;
+	parameter counter = 3125000;
 	reg[31:0] clk_count;
 	reg clk = 0;
 	always @ (posedge clk_in) begin
